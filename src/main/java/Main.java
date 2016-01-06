@@ -1,3 +1,4 @@
+import com.google.gson.Gson;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.ArrayList;
@@ -12,6 +13,8 @@ import spark.ModelAndView;
 import static spark.Spark.get;
 
 import com.heroku.sdk.jdbc.DatabaseUrl;
+import com.sun.corba.se.spi.presentation.rmi.StubAdapter;
+import data.GraphData;
 
 public class Main {
 
@@ -55,6 +58,14 @@ public class Main {
       }
     }, new FreeMarkerEngine());
 
+    
+    get("/test/hoge", (req, res) -> {
+        Gson gson = new Gson();
+        GraphData gs = GraphData.initData();
+        String msg = gson.toJson(gs);
+        return msg;
+    });
+    
   }
 
 }
