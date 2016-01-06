@@ -63,9 +63,13 @@ public class Main {
         Gson gson = new Gson();
         GraphData gs = GraphData.initData();
         String msg = gson.toJson(gs);
-        return msg;
+        System.out.println(msg);
+        String hoge = "{\"hoge\":\"riri\"}";
+        System.out.println(hoge);
+        String test = gson.toJson(hoge,String.class);
+        return hoge;
     });
-    
+
   }
 
 }

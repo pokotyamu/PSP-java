@@ -21,7 +21,17 @@ public class GraphData {
 
     @Override
     public String toString() {
-        return "{graph : {title : "+ title+"}}";
+        StringBuilder str = new StringBuilder("{");
+        if(title.length() > 0){
+            str.append("title :\n");
+            str.append(title);
+        }
+        if(xAsix.length() > 0){
+            str.append("xAsix :\n");
+            str.append(xAsix);
+        }
+        str.append("}");
+        return str.toString();
     }
     
 }
