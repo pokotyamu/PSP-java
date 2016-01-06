@@ -15,6 +15,7 @@ import static spark.Spark.get;
 import com.heroku.sdk.jdbc.DatabaseUrl;
 import com.sun.corba.se.spi.presentation.rmi.StubAdapter;
 import data.GraphData;
+import data.testGraphData;
 
 public class Main {
 
@@ -63,13 +64,7 @@ public class Main {
         Gson gson = new Gson();
         GraphData gs = GraphData.initData();
         String msg = gson.toJson(gs);
-        System.out.println(msg);
-        String hoge = "{\"hoge\":\"riri\"}";
-        System.out.println(hoge);
-        String test = gson.toJson(hoge,String.class);
-        return hoge;
+        return "{" + new testGraphData() + "}";
     });
-
   }
-
 }
