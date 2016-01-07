@@ -1,11 +1,12 @@
 import com.google.gson.Gson;
+import com.healthmarketscience.jackcess.Database;
+import com.healthmarketscience.jackcess.DatabaseBuilder;
+import com.healthmarketscience.jackcess.Table;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Map;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 
 import static spark.Spark.*;
 import spark.template.freemarker.FreeMarkerEngine;
@@ -13,23 +14,16 @@ import spark.ModelAndView;
 import static spark.Spark.get;
 
 import com.heroku.sdk.jdbc.DatabaseUrl;
-import com.sun.corba.se.spi.presentation.rmi.StubAdapter;
 import data.GraphData;
-import data.MdbFileData;
 import data.testGraphData;
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import spark.Request;
 import spark.Response;
 
@@ -78,7 +72,7 @@ public class Main {
     post("/mdb/:id", (req,res) -> {
         String uri = "https://psp-analysis.herokuapp.com/mdbs/"+req.params("id")+"/download";
         URL url = new URL(uri);
-        // uRLからInputStreamオブジェクトを取得（入力）
+        // URLからInputStreamオブジェクトを取得（入力）
         InputStream in = url.openStream();
         File f = new File("mdb.mdb");
         // 出力先ファイル　OutputStream（出力）
@@ -92,7 +86,14 @@ public class Main {
         }
         out.flush();
         
-        //System.out.println(file.getFile());
+        System.out.println(f.getName());
+        try {
+            Database db = DatabaseBuilder.open(f);
+            System.out.println(db.getTableNames());
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
         return "";
     });
     
