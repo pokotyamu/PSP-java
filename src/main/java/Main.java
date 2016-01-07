@@ -15,6 +15,8 @@ import static spark.Spark.get;
 
 import com.heroku.sdk.jdbc.DatabaseUrl;
 import data.GraphData;
+import data.Matrix;
+import data.MatrixFactory;
 import data.testGraphData;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -90,6 +92,11 @@ public class Main {
         try {
             Database db = DatabaseBuilder.open(f);
             System.out.println(db.getTableNames());
+        
+            ArrayList<Matrix> list =MatrixFactory.create(db);
+            for (Matrix m : list) {
+                System.out.println(m);
+            }
         }
         catch(Exception e){
             System.out.println(e);
