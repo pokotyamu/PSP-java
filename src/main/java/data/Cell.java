@@ -14,7 +14,12 @@ public class Cell {
     private Object value;
 
     public Cell(Object value) {
-        this.value = value;
+        if(value != null){
+            this.value = value;
+        }else{
+            this.value = "";
+        }
+
     }
 
     public Object getValue() {

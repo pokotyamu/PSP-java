@@ -93,8 +93,9 @@ public class Main {
             Database db = DatabaseBuilder.open(f);
             System.out.println(db.getTableNames());
         
-            ArrayList<Matrix> list =MatrixFactory.create(db);
+            ArrayList<Matrix> list = MatrixFactory.create(db);
             for (Matrix m : list) {
+                System.out.println("++++++++++++++++++++++++++");
                 System.out.println(m);
             }
         }

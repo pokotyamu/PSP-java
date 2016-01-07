@@ -5,6 +5,7 @@
  */
 package data;
 
+import com.healthmarketscience.jackcess.Column;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,12 +22,12 @@ public class Matrix {
     
     public Matrix() {
         cols = new ArrayList<>();
-        projectIDds = new DataSet("ProjectID");
+        projectIDds = new DataSet("ProjectIDs");
     }
     
     public Matrix(String name){
         cols = new ArrayList<>();
-        projectIDds = new DataSet("ProjectID");
+        projectIDds = new DataSet("ProjectIDs");
         this.name = name;
     }
     
@@ -113,13 +114,25 @@ public class Matrix {
         StringBuilder strb = new StringBuilder();
         strb.append("TableName : ");
         strb.append(name);
+/*      一回デバックも兼ねてコメントアウト
         strb.append("\n=Key=\n");
         strb.append(projectIDds);
+        */
         strb.append("\n=Cols=\n");
-        for (DataSet col : cols) {
-            strb.append(col);
-            strb.append("\n");
-        }
+        
+            for (DataSet col : cols) {
+                try{
+                    strb.append(col);
+                    strb.append("\n");
+                }catch(NullPointerException nu){
+                    System.out.println("nullはここ");
+                }
+            }
         return strb.toString();
     }
+
+    public void addCell(String name, Object cell) {
+        getDataSet(name).addCell(new Cell(cell));
+    }
+
 }
