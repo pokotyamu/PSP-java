@@ -26,6 +26,7 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import parser.JsonMDBParser;
 import spark.Request;
 import spark.Response;
 
@@ -73,26 +74,12 @@ public class Main {
 
     post("/mdb/:id", (req,res) -> {
         String uri = "https://psp-analysis.herokuapp.com/mdbs/"+req.params("id")+"/download";
-        URL url = new URL(uri);
-        // URLからInputStreamオブジェクトを取得（入力）
-        InputStream in = url.openStream();
-        File f = new File("mdb.mdb");
-        // 出力先ファイル　OutputStream（出力）
-        OutputStream out = new FileOutputStream(f);
-
-        byte[] buf = new byte[1024];
-        int len = 0;
-        // 終わるまで書き込み
-        while ((len = in.read(buf)) > 0) {
-            out.write(buf, 0, len);
-        }
-        out.flush();
+        File file  = JsonMDBParser.create(uri);
         
-        System.out.println(f.getName());
+        System.out.println(file.getName());
         try {
-            Database db = DatabaseBuilder.open(f);
+            Database db = DatabaseBuilder.open(file);
             System.out.println(db.getTableNames());
-        
             ArrayList<Matrix> list = MatrixFactory.create(db);
             for (Matrix m : list) {
                 System.out.println("++++++++++++++++++++++++++");
