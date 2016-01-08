@@ -17,6 +17,7 @@ import com.heroku.sdk.jdbc.DatabaseUrl;
 import data.GraphData;
 import data.Matrix;
 import data.MatrixFactory;
+import data.UserData;
 import data.testGraphData;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -75,24 +76,18 @@ public class Main {
     post("/mdb/:id", (req,res) -> {
         String uri = "https://psp-analysis.herokuapp.com/mdbs/"+req.params("id")+"/download";
         File file  = JsonMDBParser.create(uri);
-        
         System.out.println(file.getName());
         try {
             Database db = DatabaseBuilder.open(file);
             System.out.println(db.getTableNames());
-            ArrayList<Matrix> list = MatrixFactory.create(db);
-            for (Matrix m : list) {
-                System.out.println("++++++++++++++++++++++++++");
-                System.out.println(m);
-            }
+            UserData ud = new UserData(MatrixFactory.create(db));
+            System.out.println(ud.getMatrix("LOGDDetail"));
         }
         catch(Exception e){
             System.out.println(e);
         }
         return "";
     });
-    
-    
     
     get("/test/hoge", (req, res) -> {
         Gson gson = new Gson();

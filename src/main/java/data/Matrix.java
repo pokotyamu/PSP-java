@@ -72,6 +72,10 @@ public class Matrix {
         }
         return ds;
     }
+
+    public String getName() {
+        return name;
+    }
     
     public Cell getCell(String colName, int i){
         return this.getDataSet(colName).getCell(i);
