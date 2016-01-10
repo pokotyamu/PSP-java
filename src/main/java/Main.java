@@ -83,7 +83,7 @@ public class Main {
     get("/result", (req, res) -> {
         Gson gson = new Gson();
         GraphData gs = testGraphData.init();
-        return "{" + gs.toJson() + "}";
+        return "\"graph\":{" + gs.toJson() + "}";
     });
   }
 }
