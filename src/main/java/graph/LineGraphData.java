@@ -34,7 +34,7 @@ public class LineGraphData extends GraphData{
     public String appendSeries() {
         StringBuilder str = new StringBuilder();
         if (category.size() > 0) {
-            str.append(", \"series\": ");
+            str.append(", \"series\": [");
             for(int i = 0; i < series.size(); i++){
                 DataSet ds = series.get(i);
                 if(i > 1){
@@ -46,7 +46,7 @@ public class LineGraphData extends GraphData{
                 str.append(ds.getData());
                 str.append("}");
             }
-            str.append("}");
+            str.append("]}");
         }
         return str.toString();
     }
