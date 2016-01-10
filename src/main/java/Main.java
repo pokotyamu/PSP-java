@@ -1,7 +1,6 @@
 import com.google.gson.Gson;
 import com.healthmarketscience.jackcess.Database;
 import com.healthmarketscience.jackcess.DatabaseBuilder;
-import com.healthmarketscience.jackcess.Table;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.ArrayList;
@@ -14,19 +13,11 @@ import spark.ModelAndView;
 import static spark.Spark.get;
 
 import com.heroku.sdk.jdbc.DatabaseUrl;
-import data.GraphData;
-import data.Matrix;
+import graph.GraphData;
 import data.MatrixFactory;
 import data.UserData;
 import data.testGraphData;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import parser.JsonMDBParser;
 import spark.Request;
 import spark.Response;
@@ -81,7 +72,7 @@ public class Main {
             Database db = DatabaseBuilder.open(file);
             System.out.println(db.getTableNames());
             UserData ud = new UserData(MatrixFactory.create(db));
-            System.out.println(ud.getMatrix("LOGDDetail"));
+            System.out.println(ud.getMatrix("ProgramSize"));
         }
         catch(Exception e){
             System.out.println(e);
@@ -89,11 +80,10 @@ public class Main {
         return "";
     });
     
-    get("/test/hoge", (req, res) -> {
+    get("/result", (req, res) -> {
         Gson gson = new Gson();
-        GraphData gs = GraphData.initData();
-        String msg = gson.toJson(gs);
-        return "{" + new testGraphData() + "}";
+        GraphData gs = testGraphData.init();
+        return "{" + gs.toJson() + "}";
     });
   }
 }

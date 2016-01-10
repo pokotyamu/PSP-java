@@ -5,11 +5,30 @@
  */
 package data;
 
+import graph.GraphData;
+import graph.GraphDataFactory;
+
 /**
  *
  * @author pokotyamu
  */
 public class testGraphData {
+
+    public static GraphData init() {
+        GraphData gd = GraphDataFactory.createGraphData("line");
+        gd.category = new DataSet("ProjectID");
+        for(int i = 400; i < 408; i++){
+            gd.category.addCell(new Cell(i));
+        }
+        
+        DataSet ds = new DataSet("ActMinTotal");
+        for(int i = 400; i < 408; i++){
+            ds.addCell(new Cell(i));
+        }
+        gd.series.add(ds);
+        
+        return gd;
+    }
 
     @Override
     public String toString() {

@@ -75,4 +75,12 @@ public class DataSet {
         strb.append(cells);
         return strb.toString();
     }
+
+    public List<Cell> getData() {
+        return cells;
+    }
+
+    public boolean isExist() {
+        return this.dataName.length() > 0;
+    }
 }
