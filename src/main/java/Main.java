@@ -77,6 +77,7 @@ public class Main {
         catch(Exception e){
             System.out.println(e);
         }
+        res.redirect("https://psp-analysis.herokuapp.com/charts/create/",307);
         return "";
     });
     
