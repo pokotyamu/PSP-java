@@ -1,7 +1,6 @@
 import com.google.gson.Gson;
 import com.healthmarketscience.jackcess.Database;
 import com.healthmarketscience.jackcess.DatabaseBuilder;
-import com.healthmarketscience.jackcess.Table;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.ArrayList;
@@ -14,18 +13,12 @@ import spark.ModelAndView;
 import static spark.Spark.get;
 
 import com.heroku.sdk.jdbc.DatabaseUrl;
-import data.GraphData;
-import data.Matrix;
+import graph.GraphData;
 import data.MatrixFactory;
+import data.UserData;
 import data.testGraphData;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import parser.JsonMDBParser;
 import spark.Request;
 import spark.Response;
 
@@ -73,45 +66,25 @@ public class Main {
 
     post("/mdb/:id", (req,res) -> {
         String uri = "https://psp-analysis.herokuapp.com/mdbs/"+req.params("id")+"/download";
-        URL url = new URL(uri);
-        // URLからInputStreamオブジェクトを取得（入力）
-        InputStream in = url.openStream();
-        File f = new File("mdb.mdb");
-        // 出力先ファイル　OutputStream（出力）
-        OutputStream out = new FileOutputStream(f);
-
-        byte[] buf = new byte[1024];
-        int len = 0;
-        // 終わるまで書き込み
-        while ((len = in.read(buf)) > 0) {
-            out.write(buf, 0, len);
-        }
-        out.flush();
-        
-        System.out.println(f.getName());
+        File file  = JsonMDBParser.create(uri);
+        System.out.println(file.getName());
         try {
-            Database db = DatabaseBuilder.open(f);
+            Database db = DatabaseBuilder.open(file);
             System.out.println(db.getTableNames());
-        
-            ArrayList<Matrix> list = MatrixFactory.create(db);
-            for (Matrix m : list) {
-                System.out.println("++++++++++++++++++++++++++");
-                System.out.println(m);
-            }
+            UserData ud = new UserData(MatrixFactory.create(db));
+            System.out.println(ud.getMatrix("ProgramSize"));
         }
         catch(Exception e){
             System.out.println(e);
         }
+        res.redirect("https://psp-analysis.herokuapp.com/charts/create/",307);
         return "";
     });
     
-    
-    
-    get("/test/hoge", (req, res) -> {
+    get("/result","application/json", (req, res) -> {
         Gson gson = new Gson();
-        GraphData gs = GraphData.initData();
-        String msg = gson.toJson(gs);
-        return "{" + new testGraphData() + "}";
+        GraphData gs = testGraphData.init();
+        return "{\"graph\":" + gs.toJson() + "}";
     });
   }
 }
