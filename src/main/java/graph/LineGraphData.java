@@ -22,7 +22,7 @@ public class LineGraphData extends GraphData{
     public String appendCategory() {
         StringBuilder str = new StringBuilder();
         if(category.isExist()){
-            str.append("\", xAxis\" : { \"title\" : \"");
+            str.append(",\"xAxis\" : { \"title\" : \"");
             str.append(category.getDataName());
             str.append("\", \"categories\" : ");
             str.append(category.getData());
@@ -46,7 +46,7 @@ public class LineGraphData extends GraphData{
                 str.append(ds.getData());
                 str.append("}");
             }
-            str.append("]");
+            str.append("]}");
         }
         return str.toString();
     }
