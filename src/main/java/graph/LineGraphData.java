@@ -26,6 +26,7 @@ public class LineGraphData extends GraphData{
             str.append(category.getDataName());
             str.append("\", \"categories\" : ");
             str.append(category.getData());
+            str.append("}");
         }
         return str.toString();
     }
@@ -34,7 +35,8 @@ public class LineGraphData extends GraphData{
     public String appendSeries() {
         StringBuilder str = new StringBuilder();
         if (category.size() > 0) {
-            str.append(", \"series\": [");
+            str.append(",\"yAxis\" : {");
+            str.append("\"series\": [");
             for(int i = 0; i < series.size(); i++){
                 DataSet ds = series.get(i);
                 if(i > 1){
