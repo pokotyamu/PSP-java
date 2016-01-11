@@ -13,6 +13,11 @@ import data.Matrix;
  * @author pokotyamu
  */
 public class ScatterGraphData extends GraphData{
+
+    public ScatterGraphData() {
+        super();
+        this.type = "scatter";
+    }
     
     @Override
     public String appendCategory() {
@@ -58,7 +63,6 @@ public class ScatterGraphData extends GraphData{
             str.append("{\"name\" : \"");
             str.append(matrix.getName());
             str.append("\" , \"data\" : [");
-            System.out.println();
             for(int i = 0;i < matrix.getCols().size(); i += 2){
                 DataSet ds1 = matrix.getCols().get(i);
                 DataSet ds2 = matrix.getCols().get(i + 1);

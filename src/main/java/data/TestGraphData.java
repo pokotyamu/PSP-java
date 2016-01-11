@@ -73,7 +73,7 @@ public class TestGraphData {
         ScatterGraphData gd = (ScatterGraphData) GraphDataFactory.createGraphData("scatter");
         DataSet ds = new DataSet("xdata");
         DataSet ds1 = new DataSet("ydata");
-        for(int i = 0; i < 30; i++){
+        for(int i = 0; i < 120; i++){
             ds.addCell(new Cell((int) (1000 * Math.random())));
             ds1.addCell(new Cell((int) (100 * Math.random())));
         }
