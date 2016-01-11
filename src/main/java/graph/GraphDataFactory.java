@@ -16,6 +16,8 @@ public class GraphDataFactory {
         switch(type){
             case "line" :
                 return new LineGraphData();
+            case "column":
+                return new ColumnGraphData();
         }
         return null;
     }

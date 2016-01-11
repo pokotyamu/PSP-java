@@ -15,12 +15,13 @@ import graph.GraphDataFactory;
 public class testGraphData {
 
     public static GraphData init() {
-        GraphData gd = GraphDataFactory.createGraphData("line");
+        GraphData gd = GraphDataFactory.createGraphData("column");
         gd.category = new DataSet("ProjectID");
         for(int i = 400; i < 408; i++){
             gd.category.addCell(new Cell(i));
         }
-        
+        gd.xAsixTtile = "ProjectID";
+
         DataSet ds = new DataSet("ActMinTotal");
         for(int i = 400; i < 408; i++){
             ds.addCell(new Cell(i));
