@@ -29,8 +29,8 @@ public class TestGraphData {
         DataSet ds = new DataSet("ActMinTotal");
         DataSet ds1 = new DataSet("sample");
         for(int i = 400; i < 408; i++){
-            ds.addCell(new Cell(Math.random()));
-            ds1.addCell(new Cell(Math.random()));
+            ds.addCell(new Cell((int) (100 * Math.random())));
+            ds1.addCell(new Cell((int) (100 * Math.random())));
         }
         gd.series.add(ds);
         gd.series.add(ds1);
@@ -48,8 +48,8 @@ public class TestGraphData {
         DataSet ds = new DataSet("ActMinTotal");
         DataSet ds1 = new DataSet("sample");
         for(int i = 400; i < 408; i++){
-            ds.addCell(new Cell(Math.random()));
-            ds1.addCell(new Cell(Math.random()));
+            ds.addCell(new Cell((int) (100 * Math.random())));
+            ds1.addCell(new Cell((int) (100 * Math.random())));
         }
         gd.series.add(ds);
         gd.series.add(ds1);
@@ -61,7 +61,7 @@ public class TestGraphData {
         PieGraphData gd = (PieGraphData) GraphDataFactory.createGraphData("pie");
         for (int i = 0; i < 5; i++) {
             DataSet ds = new DataSet("sample"+i);
-            ds.addCell(new Cell(Math.random()));
+            ds.addCell(new Cell((int) (10 * Math.random())));
             gd.series.add(ds);
         }
         gd.seriesName = "時間";
