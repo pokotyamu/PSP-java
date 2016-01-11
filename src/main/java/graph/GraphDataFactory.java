@@ -20,6 +20,8 @@ public class GraphDataFactory {
                 return new ColumnGraphData();
             case "pie" :
                 return new PieGraphData();
+            case "scatter":
+                return new ScatterGraphData();
         }
         return null;
     }

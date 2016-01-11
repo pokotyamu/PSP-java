@@ -9,6 +9,7 @@ import graph.ColumnGraphData;
 import graph.GraphData;
 import graph.GraphDataFactory;
 import graph.PieGraphData;
+import graph.ScatterGraphData;
 import sun.security.jgss.GSSUtil;
 
 /**
@@ -65,6 +66,21 @@ public class TestGraphData {
             gd.series.add(ds);
         }
         gd.seriesName = "時間";
+        return gd;
+    }
+    
+    public static GraphData scatterGraphData(){
+        ScatterGraphData gd = (ScatterGraphData) GraphDataFactory.createGraphData("scatter");
+        DataSet ds = new DataSet("xdata");
+        DataSet ds1 = new DataSet("ydata");
+        for(int i = 0; i < 30; i++){
+            ds.addCell(new Cell((int) (1000 * Math.random())));
+            ds1.addCell(new Cell((int) (100 * Math.random())));
+        }
+        Matrix  m = new Matrix("titlename");
+        m.addCol(ds);
+        m.addCol(ds1);
+        gd.addMatrixs(m);
         return gd;
     }
 }

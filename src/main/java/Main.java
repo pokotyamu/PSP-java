@@ -88,6 +88,7 @@ public class Main {
         list.add(TestGraphData.lineGraphData());
         list.add(TestGraphData.columnGraphData());
         list.add(TestGraphData.pieGraphData());
+        list.add(TestGraphData.scatterGraphData());
         StringBuilder str = new StringBuilder("{");
         for(int i = 0; i < list.size(); i++){
             if(i > 0){
