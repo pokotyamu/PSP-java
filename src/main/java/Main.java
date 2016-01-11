@@ -16,7 +16,7 @@ import com.heroku.sdk.jdbc.DatabaseUrl;
 import graph.GraphData;
 import data.MatrixFactory;
 import data.UserData;
-import data.testGraphData;
+import data.TestGraphData;
 import java.io.File;
 import java.util.List;
 import parser.JsonMDBParser;
@@ -83,11 +83,10 @@ public class Main {
     });
     
     get("/result","application/json", (req, res) -> {
-        Gson gson = new Gson();
-        GraphData gs = testGraphData.init();
         List<GraphData> list = new ArrayList<>();
-        list.add(gs);
-        list.add(gs);
+        list.add(TestGraphData.lineGraphData());
+        list.add(TestGraphData.lineGraphData());
+        list.add(TestGraphData.columnGraphData());
         StringBuilder str = new StringBuilder("{");
         for(int i = 0; i < list.size(); i++){
             if(i > 0){

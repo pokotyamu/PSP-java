@@ -17,7 +17,11 @@ public class ColumnGraphData extends GraphData{
     
     public ColumnGraphData() {
         super();
-        this.type = "Column";
+        this.type = "column";
+    }
+
+    public void setStacking(String stacking) {
+        this.stacking = stacking;
     }
 
     @Override
@@ -47,7 +51,7 @@ public class ColumnGraphData extends GraphData{
             str.append(", \"series\": [");
             for(int i = 0; i < series.size(); i++){
                 DataSet ds = series.get(i);
-                if(i > 1){
+                if(i > 0){
                     str.append(",");
                 }
                 str.append("{ \"name\" : \"");
