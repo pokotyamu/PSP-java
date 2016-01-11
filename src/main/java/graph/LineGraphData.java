@@ -34,7 +34,7 @@ public class LineGraphData extends GraphData{
     @Override
     public String appendSeries() {
         StringBuilder str = new StringBuilder();
-        if (category.size() > 0) {
+        if (series.size() > 0) {
             str.append(",\"yAxis\" : { \"title\" : \"");
             str.append(yAsixTtile);
             str.append("\" , \"series\": [");
