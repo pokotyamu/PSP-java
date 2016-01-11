@@ -11,11 +11,17 @@ import data.DataSet;
  *
  * @author pokotyamu
  */
-public class LineGraphData extends GraphData{
+public class ColumnGraphData extends GraphData{
 
-    public LineGraphData() {
+    public String stacking = "";
+    
+    public ColumnGraphData() {
         super();
-        this.type = "line";
+        this.type = "column";
+    }
+
+    public void setStacking(String stacking) {
+        this.stacking = stacking;
     }
 
     @Override
@@ -31,13 +37,18 @@ public class LineGraphData extends GraphData{
         return str.toString();
     }
 
+    
+    
     @Override
     public String appendSeries() {
         StringBuilder str = new StringBuilder();
         if (series.size() > 0) {
             str.append(",\"yAxis\" : { \"title\" : \"");
             str.append(yAsixTtile);
-            str.append("\" , \"series\": [");
+            str.append("\", \"plotOptions\" : { \"column\" : { \"stacking\" : \"");
+            str.append(stacking);
+            str.append("\" } }");
+            str.append(", \"series\": [");
             for(int i = 0; i < series.size(); i++){
                 DataSet ds = series.get(i);
                 if(i > 0){

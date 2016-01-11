@@ -81,6 +81,11 @@ public class Matrix {
         return this.getDataSet(colName).getCell(i);
     }
 
+    //ひょっとしたらシャローコピーになってる可能性あり
+    public List<DataSet> getCols() {
+        return cols;
+    }
+
     //テーブル列内のソート関数
     //keyが1の時：降順
     //keyが−1の時：昇順

@@ -11,33 +11,29 @@ import data.DataSet;
  *
  * @author pokotyamu
  */
-public class LineGraphData extends GraphData{
+public class PieGraphData extends GraphData{
+    
+    public String seriesName = "";
 
-    public LineGraphData() {
+    public PieGraphData() {
         super();
-        this.type = "line";
+        this.type = "pie";
     }
-
+    
+    
+            
     @Override
     public String appendCategory() {
-        StringBuilder str = new StringBuilder();
-        if(category.isExist()){
-            str.append(",\"xAxis\" : { \"title\" : \"");
-            str.append(xAsixTtile);
-            str.append("\", \"categories\" : ");
-            str.append(category.getData());
-            str.append("}");
-        }
-        return str.toString();
+        return "";
     }
 
     @Override
     public String appendSeries() {
         StringBuilder str = new StringBuilder();
         if (series.size() > 0) {
-            str.append(",\"yAxis\" : { \"title\" : \"");
-            str.append(yAsixTtile);
-            str.append("\" , \"series\": [");
+            str.append(", \"series\": [{ \"name\" : \"");
+            str.append(seriesName);
+            str.append("\" , \"data\" : [");
             for(int i = 0; i < series.size(); i++){
                 DataSet ds = series.get(i);
                 if(i > 0){
@@ -45,11 +41,11 @@ public class LineGraphData extends GraphData{
                 }
                 str.append("{ \"name\" : \"");
                 str.append(ds.getDataName());
-                str.append("\", \"data\" : ");
+                str.append("\", \"y\" : ");
                 str.append(ds.getData());
                 str.append("}");
             }
-            str.append("]}");
+            str.append("]}]");
         }
         return str.toString();
     }

@@ -16,6 +16,12 @@ public class GraphDataFactory {
         switch(type){
             case "line" :
                 return new LineGraphData();
+            case "column":
+                return new ColumnGraphData();
+            case "pie" :
+                return new PieGraphData();
+            case "scatter":
+                return new ScatterGraphData();
         }
         return null;
     }
