@@ -23,7 +23,7 @@ public class LineGraphData extends GraphData{
         StringBuilder str = new StringBuilder();
         if(category.isExist()){
             str.append(",\"xAxis\" : { \"title\" : \"");
-            str.append(category.getDataName());
+            str.append(xAsixTtile);
             str.append("\", \"categories\" : ");
             str.append(category.getData());
             str.append("}");

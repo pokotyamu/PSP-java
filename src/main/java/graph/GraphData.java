@@ -18,6 +18,8 @@ public abstract class GraphData {
     public String title = "";
     public String type = "";
     public DataSet category;
+    public String xAsixTtile = "";
+    public String yAsixTtile = "";
     public List<DataSet> series;
 
     public GraphData() {
