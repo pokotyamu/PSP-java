@@ -6,6 +6,7 @@
 package graph;
 
 import data.DataSet;
+import data.Matrix;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import java.util.List;
 public abstract class GraphData {
     public String title = "";
     public String type = "";
+    public List<Matrix> matrixs;
     public DataSet category;
     public String xAsixTtile = "";
     public String yAsixTtile = "";
@@ -26,10 +28,15 @@ public abstract class GraphData {
         this.title = "sample title";
         this.category = new DataSet();
         this.series = new ArrayList<>();
+        this.matrixs = new ArrayList<>();
     }
     
     public void addSeries(DataSet ds){
         this.series.add(ds);
+    }
+    
+    public void addMatrixs(Matrix m){
+        this.matrixs.add(m);
     }
     
     public String toJson(){
