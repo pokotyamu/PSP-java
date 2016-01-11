@@ -8,6 +8,8 @@ package data;
 import graph.ColumnGraphData;
 import graph.GraphData;
 import graph.GraphDataFactory;
+import graph.PieGraphData;
+import sun.security.jgss.GSSUtil;
 
 /**
  *
@@ -52,8 +54,17 @@ public class TestGraphData {
         gd.series.add(ds);
         gd.series.add(ds1);
         gd.yAsixTtile = "type";
-        
         return gd;
     }
-    
+
+    public static GraphData pieGraphData(){
+        PieGraphData gd = (PieGraphData) GraphDataFactory.createGraphData("pie");
+        for (int i = 0; i < 5; i++) {
+            DataSet ds = new DataSet("sample"+i);
+            ds.addCell(new Cell(Math.random()));
+            gd.series.add(ds);
+        }
+        gd.seriesName = "時間";
+        return gd;
+    }
 }

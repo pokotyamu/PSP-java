@@ -18,6 +18,8 @@ public class GraphDataFactory {
                 return new LineGraphData();
             case "column":
                 return new ColumnGraphData();
+            case "pie" :
+                return new PieGraphData();
         }
         return null;
     }
