@@ -38,10 +38,6 @@ public class Result {
         return str.toString();
     }
 
-    public void addData(Result procesReport) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     public void setGraphData(List<GraphData> gdlist) {
         this.gdlist = gdlist;
     }
