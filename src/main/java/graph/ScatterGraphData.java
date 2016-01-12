@@ -38,20 +38,6 @@ public class ScatterGraphData extends GraphData{
             str.append(yAsixTtile);
             str.append("\" , \"series\": [");
             str.append(appendMatrix());
-/*            
-            for(int i = 0; i < series.size(); i += 2){
-                DataSet ds = series.get(i);
-                DataSet ds1 = series.get(i+1);
-                if(i > 0){
-                    str.append(",");
-                }
-                str.append("{ \"name\" : \"");
-                str.append(ds.getDataName());
-                str.append("\", \"data\" : ");
-                str.append(ds.getData());
-                str.append("}");
-            }
-*/
             str.append("]}");
         }
         return str.toString();
