@@ -34,35 +34,21 @@ public class Main {
         post("/mdb/:id", (req,res) -> {
             String uri = "https://psp-analysis.herokuapp.com/mdbs/"+req.params("id")+"/download";
             File file  = JsonMDBParser.create(uri);
-            System.out.println(file.getName());
-            try {
-                Database db = DatabaseBuilder.open(file);
-                System.out.println(db.getTableNames());
-                UserData ud = new UserData(MatrixFactory.create(db));
-                System.out.println(ud.getMatrix("ProgramSize"));
-            }
-            catch(Exception e){
-                System.out.println(e);
-            }
-            res.redirect("https://psp-analysis.herokuapp.com/charts/create/",307);
-            return "";
-        });
-        
-        get("/result","application/json", (req, res) -> {
-            String uri = "https://psp-analysis.herokuapp.com/mdbs/2/download";
-            File file  = JsonMDBParser.create(uri);
-            String jsonString ="";
             try {
                 Database db = DatabaseBuilder.open(file);
                 UserData ud = new UserData(MatrixFactory.create(db));
                 results.setGraphData(TestFlow.procesReport(ud));
-                jsonString = results.toJson();
             }
             catch(Exception e){
                 System.out.println(e);
             }
             
-            return jsonString;
+            res.redirect("https://psp-analysis.herokuapp.com/charts/create/",307);
+            return "";
+        });
+        
+        get("/result","application/json", (req, res) -> {
+            return results.toJson();
         });
     }
 }
