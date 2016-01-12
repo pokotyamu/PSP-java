@@ -6,6 +6,7 @@
 package graph;
 
 import data.DataSet;
+import data.Matrix;
 
 /**
  *

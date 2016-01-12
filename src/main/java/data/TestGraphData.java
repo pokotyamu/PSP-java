@@ -8,6 +8,7 @@ package data;
 import graph.ColumnGraphData;
 import graph.GraphData;
 import graph.GraphDataFactory;
+import graph.LineGraphData;
 import graph.PieGraphData;
 import graph.ScatterGraphData;
 
@@ -17,43 +18,45 @@ import graph.ScatterGraphData;
  */
 public class TestGraphData {
 
-    public static GraphData lineGraphData() {
-        GraphData gd = GraphDataFactory.createGraphData("line");
-
-        gd.category = new DataSet("ProjectID");
+    private static Matrix createTestData(){
+    Matrix m = new Matrix();
+        DataSet category = new DataSet("ProjectID");
         for(int i = 400; i < 408; i++){
-            gd.category.addCell(new Cell(i));
+            category.addCell(new Cell(i));
         }
-        gd.xAsixTtile = "ProjectID";
-
-        DataSet ds = new DataSet("ActMinTotal");
-        DataSet ds1 = new DataSet("sample");
+        DataSet ds = new DataSet("ActT");
+        DataSet ds1 = new DataSet("ActA");
         for(int i = 400; i < 408; i++){
             ds.addCell(new Cell((int) (100 * Math.random())));
-            ds1.addCell(new Cell((int) (100 * Math.random())));
+            ds1.addCell(new Cell((int) (60 * Math.random())));
         }
-        gd.series.add(ds);
-        gd.series.add(ds1);
-        gd.yAsixTtile = "type";
+        m.addCol(category);
+        m.addCol(ds);
+        m.addCol(ds1);
+        return m;
+    }
+    
+    public static GraphData lineGraphData() {
+        LineGraphData gd = (LineGraphData) GraphDataFactory.createGraphData("line");
+        Matrix m = createTestData();
+        gd.setMatrix(m);
+        gd.setCategory("ProjectID");
+        gd.addSeries("ActT");
+        gd.addSeries("ActA");
+        gd.setxAsixTtile("ProjectID");
+        gd.setyAsixTtile("LOC");
         return gd;
     }
 
     public static GraphData columnGraphData() {
         ColumnGraphData gd = (ColumnGraphData) GraphDataFactory.createGraphData("column");
-        gd.category = new DataSet("ProjectID");
-        for(int i = 400; i < 408; i++){
-            gd.category.addCell(new Cell(i));
-        }
-        gd.xAsixTtile = "ProjectID";
-        DataSet ds = new DataSet("ActMinTotal");
-        DataSet ds1 = new DataSet("sample");
-        for(int i = 400; i < 408; i++){
-            ds.addCell(new Cell((int) (100 * Math.random())));
-            ds1.addCell(new Cell((int) (100 * Math.random())));
-        }
-        gd.series.add(ds);
-        gd.series.add(ds1);
-        gd.yAsixTtile = "type";
+        Matrix m = createTestData();
+        gd.setMatrix(m);
+        gd.setCategory("ProjectID");
+        gd.addSeries("ActT");
+        gd.addSeries("ActA");
+        gd.setxAsixTtile("ProjectID");
+        gd.setyAsixTtile("LOC");
         return gd;
     }
 
@@ -79,7 +82,7 @@ public class TestGraphData {
         Matrix  m = new Matrix("titlename");
         m.addCol(ds);
         m.addCol(ds1);
-        gd.addMatrixs(m);
+        gd.matrix = m;
         return gd;
     }
 }

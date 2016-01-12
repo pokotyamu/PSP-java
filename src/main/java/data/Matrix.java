@@ -5,7 +5,7 @@
  */
 package data;
 
-import com.healthmarketscience.jackcess.Column;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -123,12 +123,7 @@ public class Matrix {
         StringBuilder strb = new StringBuilder();
         strb.append("TableName : ");
         strb.append(name);
-/*      一回デバックも兼ねてコメントアウト
-        strb.append("\n=Key=\n");
-        strb.append(projectIDds);
-        */
         strb.append("\n=Cols=\n");
-        
             for (DataSet col : cols) {
                 try{
                     strb.append(col);
@@ -142,6 +137,10 @@ public class Matrix {
 
     public void addCell(String name, Object cell) {
         getDataSet(name).addCell(new Cell(cell));
+    }
+
+    public int size() {
+        return this.cols.size();
     }
 
 }

@@ -33,7 +33,7 @@ public class ScatterGraphData extends GraphData{
     @Override
     public String appendSeries() {
         StringBuilder str = new StringBuilder();
-        if (matrixs.size() > 0) {
+        if (matrix.size() > 0) {
             str.append(",\"yAxis\" : { \"title\" : \"");
             str.append(yAsixTtile);
             str.append("\" , \"series\": [");
@@ -45,23 +45,21 @@ public class ScatterGraphData extends GraphData{
 
     private String appendMatrix() {
         StringBuilder str = new StringBuilder();
-        for (Matrix matrix : matrixs) {
-            str.append("{\"name\" : \"");
-            str.append(matrix.getName());
-            str.append("\" , \"data\" : [");
-            for(int i = 0;i < matrix.getCols().size(); i += 2){
-                DataSet ds1 = matrix.getCols().get(i);
-                DataSet ds2 = matrix.getCols().get(i + 1);
-                for (int j = 0; j < ds1.size(); j++) {
-                    if(j > 0){
-                        str.append(",");
-                    }
-                    str.append("[");
-                    str.append(ds1.getCell(j));
+        str.append("{\"name\" : \"");
+        str.append(matrix.getName());
+        str.append("\" , \"data\" : [");
+        for(int i = 0;i < matrix.getCols().size(); i += 2){
+            DataSet ds1 = matrix.getCols().get(i);
+            DataSet ds2 = matrix.getCols().get(i + 1);
+            for (int j = 0; j < ds1.size(); j++) {
+                if(j > 0){
                     str.append(",");
-                    str.append(ds2.getCell(j));
-                    str.append("]");                    
                 }
+                str.append("[");
+                str.append(ds1.getCell(j));
+                str.append(",");
+                str.append(ds2.getCell(j));
+                str.append("]");                    
             }
             str.append("]}");
         }
