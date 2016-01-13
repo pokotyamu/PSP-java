@@ -6,6 +6,7 @@
 package graph;
 
 import data.DataSet;
+import data.Matrix;
 
 /**
  *
@@ -17,6 +18,11 @@ public class ColumnGraphData extends GraphData{
     
     public ColumnGraphData() {
         super();
+        this.type = "column";
+    }
+
+    public ColumnGraphData(Matrix matrix) {
+        super(matrix);
         this.type = "column";
     }
 

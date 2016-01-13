@@ -20,14 +20,24 @@ public abstract class GraphData {
     public String type = "";
     public Matrix matrix;
     public DataSet category;
+    public List<DataSet> series;
     public String xAsixTtile = "";
     public String yAsixTtile = "";
-    public List<DataSet> series;
+
 
     public GraphData() {
-        this.title = "sample title";
         this.category = new DataSet();
         this.series = new ArrayList<>();
+    }
+    
+    public GraphData(Matrix matrix){
+        this.matrix = matrix;
+        this.category = new DataSet();
+        this.series = new ArrayList<>();
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
     
     public void addSeries(DataSet ds){

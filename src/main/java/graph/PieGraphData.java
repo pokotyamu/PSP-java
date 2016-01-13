@@ -6,6 +6,7 @@
 package graph;
 
 import data.DataSet;
+import data.Matrix;
 
 /**
  *
@@ -19,7 +20,11 @@ public class PieGraphData extends GraphData{
         super();
         this.type = "pie";
     }
-    
+
+    public PieGraphData(Matrix matrix) {
+        super(matrix);
+        this.type = "pie";
+    }
     
             
     @Override

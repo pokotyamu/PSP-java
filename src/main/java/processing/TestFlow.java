@@ -23,7 +23,7 @@ public class TestFlow {
         Matrix m = ud.getMatrix("ProgramSize");
         LineGraphData gd1 = new LineGraphData();
         gd1.setMatrix(m);
-        gd1.title = "title";
+        gd1.setTitle("title");
         gd1.setCategory("ProjectID");
         gd1.addSeries("ActualT");
         gd1.addSeries("ActualA");

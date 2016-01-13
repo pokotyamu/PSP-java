@@ -19,6 +19,13 @@ public class LineGraphData extends GraphData{
         this.type = "line";
     }
 
+    public LineGraphData(Matrix matrix) {
+        super(matrix);
+        this.type = "line";
+    }
+    
+    
+
     @Override
     public String appendCategory() {
         StringBuilder str = new StringBuilder();
