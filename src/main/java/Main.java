@@ -37,7 +37,7 @@ public class Main {
             try {
                 Database db = DatabaseBuilder.open(file);
                 UserData ud = new UserData(MatrixFactory.create(db));
-                results.setGraphData(TestFlow.procesReport(ud));
+                results.setGraphData(TestFlow.processReport(ud));
             }
             catch(Exception e){
                 System.out.println(e);
