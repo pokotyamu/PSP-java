@@ -29,10 +29,10 @@ public class ProcessParser {
     public static void print(String path){
         try {
             Contena c = new Contena();
-            System.out.print(c.getName());
+            System.out.println(c.getName());
             ProcessParser pp = new ProcessParser(getUD(path));
             pp.compilation_unit(c);
-            System.out.print(c.getName());
+            System.out.println(c.getName());
         } catch (Throwable e) {
             // Catching Throwable is ugly but JavaCC throws Error objects!
             System.out.println("Syntax check failed: " + e.getMessage());
@@ -46,17 +46,105 @@ public class ProcessParser {
 
 
 PARSER_END(ProcessParser)
-    SKIP :
-{         " "
+    SKIP:{
+          " "
         | "\r"
         | "\t"
         | "\f"
         | "\n"
+    }
+TOKEN :{
+    <FUNCTION: "function">
+        | <GRAPH: "graph">
+        | <LC : "(">
+        | <RC : ")">
+        | <LK : "[">
+        | <RK : "]">
+        | <LB : "{">
+        | <RB : "}">
+        | <EQ : "=">
+        | <COM : ",">        
+        }
+TOKEN :{
+    <statement_operator : "="|"<<">
+        | <condition_operator : "=="| ">"|"<" |">=" | "<=">
+        | <decimal_numeral : "0"| <digits>>
+        | <digits: ["1"-"9"](["1"-"9"])* >
+        | <string_literal : "\""<IDENTIFIERS>"\"">
+        | <boolean_literal: "true"| "false">
+        }
+
+TOKEN :{
+    <IDENTIFIERS: ["a"-"z","A"-"Z","_"](["a"-"z","A"-"Z","_","0"-"9"])*>
         }
 
 void compilation_unit(Contena c):{
-
+    List<String> functions  = new ArrayList();
 }{
-    { c.setName("piyo");}
+    functions = function_define_statements(c)
+        { 
+          System.out.println(functions);
+        }
 }
 
+List<String> function_define_statements(Contena c) :{
+    List<String> functions = new ArrayList();
+    Token name;
+    String exp;
+}{
+    name = <IDENTIFIERS>
+        <EQ>
+        exp = function_define_expression()
+    {
+        functions.add(name.image +"="+ exp);
+        return functions;
+    }
+}
+
+String function_define_expression():{
+    List<String> str = new ArrayList();
+    List<String> body = new ArrayList();
+}{
+
+    <FUNCTION><LC>
+        str = define_parameter_list()
+        <RC>
+        {
+            return "function("+str+")";
+                }
+}
+
+List<String> define_parameter_list():{
+    List<String> params = new ArrayList();
+    String str = "";
+    
+}{
+    params = argument_list()
+        {
+            return params;
+        }
+}
+
+List<String> argument_list():{
+    List<String> args = new ArrayList();
+    String arg;
+}{
+    arg = argument()
+        {args.add(arg);}
+        (<COM> arg = argument()
+            { args.add(arg);}
+         )*
+    {
+        return args; 
+    }
+}
+
+String argument():{
+    Token arg;
+}{
+    arg = <IDENTIFIERS>
+    {
+        System.out.println("arg : "+arg.image);
+        return arg.image;
+    }
+}

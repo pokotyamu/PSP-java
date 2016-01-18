@@ -9,10 +9,10 @@ public class ProcessParser implements ProcessParserConstants {
     public static void print(String path){
         try {
             Contena c = new Contena();
-            System.out.print(c.getName());
+            System.out.println(c.getName());
             ProcessParser pp = new ProcessParser(getUD(path));
             pp.compilation_unit(c);
-            System.out.print(c.getName());
+            System.out.println(c.getName());
         } catch (Throwable e) {
             // Catching Throwable is ugly but JavaCC throws Error objects!
             System.out.println("Syntax check failed: " + e.getMessage());
@@ -23,8 +23,66 @@ public class ProcessParser implements ProcessParserConstants {
         return new BufferedReader(new FileReader(new File(path)));
     }
 
-  static final public void compilation_unit(Contena c) throws ParseException {
-c.setName("piyo");
+  static final public void compilation_unit(Contena c) throws ParseException {List<String> functions  = new ArrayList();
+    functions = function_define_statements(c);
+System.out.println(functions);
+  }
+
+  static final public List<String> function_define_statements(Contena c) throws ParseException {List<String> functions = new ArrayList();
+    Token name;
+    String exp;
+    name = jj_consume_token(IDENTIFIERS);
+    jj_consume_token(EQ);
+    exp = function_define_expression();
+functions.add(name.image +"="+ exp);
+        {if ("" != null) return functions;}
+    throw new Error("Missing return statement in function");
+  }
+
+  static final public String function_define_expression() throws ParseException {List<String> str = new ArrayList();
+    jj_consume_token(FUNCTION);
+    jj_consume_token(LC);
+    str = define_parameter_list();
+    jj_consume_token(RC);
+{if ("" != null) return "function("+str+")";}
+    throw new Error("Missing return statement in function");
+  }
+
+  static final public List<String> define_parameter_list() throws ParseException {List<String> params = new ArrayList();
+    String str = "";
+    params = argument_list();
+{if ("" != null) return params;}
+    throw new Error("Missing return statement in function");
+  }
+
+  static final public List<String> argument_list() throws ParseException {List<String> args = new ArrayList();
+    String arg;
+    arg = argument();
+args.add(arg);
+    label_1:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case COM:{
+        ;
+        break;
+        }
+      default:
+        jj_la1[0] = jj_gen;
+        break label_1;
+      }
+      jj_consume_token(COM);
+      arg = argument();
+args.add(arg);
+    }
+{if ("" != null) return args;}
+    throw new Error("Missing return statement in function");
+  }
+
+  static final public String argument() throws ParseException {Token arg;
+    arg = jj_consume_token(IDENTIFIERS);
+System.out.println("arg : "+arg.image);
+        {if ("" != null) return arg.image;}
+    throw new Error("Missing return statement in function");
   }
 
   static private boolean jj_initialized_once = false;
@@ -37,13 +95,13 @@ c.setName("piyo");
   static public Token jj_nt;
   static private int jj_ntk;
   static private int jj_gen;
-  static final private int[] jj_la1 = new int[0];
+  static final private int[] jj_la1 = new int[1];
   static private int[] jj_la1_0;
   static {
       jj_la1_init_0();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {};
+      jj_la1_0 = new int[] {0x2000,};
    }
 
   /** Constructor with InputStream. */
@@ -64,6 +122,7 @@ c.setName("piyo");
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
+    for (int i = 0; i < 1; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -77,7 +136,7 @@ c.setName("piyo");
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 0; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 1; i++) jj_la1[i] = -1;
   }
 
   /** Constructor. */
@@ -94,6 +153,7 @@ c.setName("piyo");
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
+    for (int i = 0; i < 1; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -103,6 +163,7 @@ c.setName("piyo");
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
+    for (int i = 0; i < 1; i++) jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -118,6 +179,7 @@ c.setName("piyo");
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
+    for (int i = 0; i < 1; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -126,6 +188,7 @@ c.setName("piyo");
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
+    for (int i = 0; i < 1; i++) jj_la1[i] = -1;
   }
 
   static private Token jj_consume_token(int kind) throws ParseException {
@@ -176,12 +239,12 @@ c.setName("piyo");
   /** Generate ParseException. */
   static public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[6];
+    boolean[] la1tokens = new boolean[21];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 0; i++) {
+    for (int i = 0; i < 1; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
@@ -190,7 +253,7 @@ c.setName("piyo");
         }
       }
     }
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i < 21; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

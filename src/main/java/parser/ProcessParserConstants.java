@@ -10,6 +10,36 @@ public interface ProcessParserConstants {
 
   /** End of File. */
   int EOF = 0;
+  /** RegularExpression Id. */
+  int FUNCTION = 6;
+  /** RegularExpression Id. */
+  int GRAPH = 7;
+  /** RegularExpression Id. */
+  int LC = 8;
+  /** RegularExpression Id. */
+  int RC = 9;
+  /** RegularExpression Id. */
+  int LK = 10;
+  /** RegularExpression Id. */
+  int RK = 11;
+  /** RegularExpression Id. */
+  int EQ = 12;
+  /** RegularExpression Id. */
+  int COM = 13;
+  /** RegularExpression Id. */
+  int statement_operator = 14;
+  /** RegularExpression Id. */
+  int condition_operator = 15;
+  /** RegularExpression Id. */
+  int decimal_numeral = 16;
+  /** RegularExpression Id. */
+  int digits = 17;
+  /** RegularExpression Id. */
+  int string_literal = 18;
+  /** RegularExpression Id. */
+  int boolean_literal = 19;
+  /** RegularExpression Id. */
+  int IDENTIFIERS = 20;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -22,6 +52,21 @@ public interface ProcessParserConstants {
     "\"\\t\"",
     "\"\\f\"",
     "\"\\n\"",
+    "\"function\"",
+    "\"graph\"",
+    "\"(\"",
+    "\")\"",
+    "\"[\"",
+    "\"]\"",
+    "\"=\"",
+    "\",\"",
+    "<statement_operator>",
+    "<condition_operator>",
+    "<decimal_numeral>",
+    "<digits>",
+    "<string_literal>",
+    "<boolean_literal>",
+    "<IDENTIFIERS>",
   };
 
 }
