@@ -50,5 +50,19 @@ public class Main {
         get("/result","application/json", (req, res) -> {
             return results.toJson();
         });
+        
+        get("/debug", (req, res) -> {
+            String uri = "http://localhost:3000/mdbs/6/download";
+            File file  = JsonMDBParser.create(uri);
+            UserData ud = new UserData();
+            try {
+                Database db = DatabaseBuilder.open(file);
+                ud = new UserData(MatrixFactory.create(db));
+            }
+            catch(Exception e){
+                System.out.println(e);
+            }
+            return ud.getMatrixNames();
+        });
     }
 }

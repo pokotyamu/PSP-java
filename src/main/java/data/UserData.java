@@ -6,6 +6,7 @@
 package data;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -13,24 +14,32 @@ import java.util.ArrayList;
  */
 public class UserData {
     
-    private ArrayList<Matrix> matrixs;
+    private ArrayList<Matrix> matrices;
 
     public UserData() {
-        matrixs = new ArrayList<>();
+        this.matrices = new ArrayList<>();
     }
 
     public UserData(ArrayList<Matrix> matrixs) {
-        this.matrixs = matrixs;
+        this.matrices = matrixs;
     }
 
     public Matrix getMatrix(String matrixName){
         Matrix m = new Matrix();
-        for (Matrix matrix : matrixs) {
+        for (Matrix matrix : matrices) {
             if (matrix.getName().equals(matrixName)) {
                 m = matrix;
             }
         }
         return m;
+    }
+    
+    public List<String> getMatrixNames(){
+        List<String> nameList = new ArrayList();
+        for (Matrix matrix : matrices) {
+            nameList.add(matrix.getName());
+        }
+        return nameList;
     }
     
 }
