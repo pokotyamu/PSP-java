@@ -1,0 +1,29 @@
+//生産性
+productivity = function(matrix,Add,Mod,Time){
+     matrix[ , AM] = matrix[,Add] + matrix[,Mod];
+     matrix[ ,productivity] = matrix[, AM] / matrix[ ,Time] * 60;
+     return matrix;
+}
+
+productivity_line = graph(matrix){
+     gd = new GraphData();
+     gd.title = “生産性の推移";
+     gd.type = “line”;
+     gd.xAsix = “ProjectID”;
+     gd.categories << matrix[,ProjectID];
+     gd.yAsix = “LOC/時間”;
+     gd.series << matrix[ ,Productivity];
+     gd.plotLines << max(matrix[,Productivity]);
+     gd.plotLines << min(matrix[,Productivity]);
+     gd.plotLines << average(matrix[,Productivity]);
+     retrun gd;
+}
+
+main(){
+     ud = initUserData();
+     results = new Results();
+     time_size_matrix = merge(ud.ProgramSize, ud.PSPAssgtData);
+     productivity_matrix = productivity(time_size_matrix);
+     results <<  productivity_line(productivity_matrix);
+     return results;
+}
