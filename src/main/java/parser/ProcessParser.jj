@@ -63,11 +63,12 @@ TOKEN :{
         | <LB : "{">
         | <RB : "}">
         | <EQ : "=">
-        | <COM : ",">        
+        | <COM : ",">
+        | <SM : ";">
+        | <AND : "&">
         }
 TOKEN :{
-    <statement_operator : "="|"<<">
-        | <condition_operator : "=="| ">"|"<" |">=" | "<=">
+     <condition_operator : "=="| ">"|"<" |">=" | "<=">
         | <decimal_numeral : "0"| <digits>>
         | <digits: ["1"-"9"](["1"-"9"])* >
         | <string_literal : "\""<IDENTIFIERS>"\"">
@@ -109,9 +110,103 @@ String function_define_expression():{
     <FUNCTION><LC>
         str = define_parameter_list()
         <RC>
+
+        body = function_body()
         {
-            return "function("+str+")";
-                }
+            return "function("+str+"){"+body+"}";
+        }
+}
+
+List<String> function_body():{
+    List<String> statements = new ArrayList();
+    String str = "";
+}{
+    <LB>
+        statements = statements()
+        {System.out.println("statements : " + statements);}
+        <RB>
+             {return statements;}
+}
+
+List<String> statements():{
+    List<String> strs = new ArrayList();
+    String str;
+}{
+    (str = statement()<SM>
+        {
+            System.out.println("str : " + str);
+            strs.add(str);}
+     )*
+        {return strs;}
+}
+
+String statement():{
+    String varname;
+    Token op;
+    String data;
+}{
+    varname = variable_name()
+        op = <EQ>
+        data = data_expression()
+    {
+        return varname + op.image + data;
+
+    }
+}
+
+String variable_name():{
+    String t = "";
+}{
+    t = matrix_expression() {return t;}
+}
+
+String matrix_expression():{
+    Token  matrix;
+    String condition ="";
+}{
+    matrix = <IDENTIFIERS>
+        (condition = matrix_condition())?
+    {return matrix.image + condition;}
+}
+
+String matrix_condition():{
+    List<String> cols = new ArrayList();
+    List<String> rows = new ArrayList();
+    String col="",row="";
+
+}{
+    <LK>
+
+        ( col = field_expression()
+            {cols.add(col);}
+          )*
+        <COM>
+        ( row = field_expression()
+            {rows.add(row);}
+          )*
+        <RK>
+        {
+            System.out.println("["+cols+","+rows+"]");
+            return "["+cols+","+rows+"]";}
+}
+
+String field_expression():{
+    Token arg;
+}{
+    arg = <IDENTIFIERS>
+    {
+        return arg.image;
+    }
+}
+
+
+String data_expression():{
+    Token matrixname;
+    String condition="";
+}{
+    matrixname = <IDENTIFIERS>
+        (condition = matrix_condition())?
+        {return matrixname.image+condition;}
 }
 
 List<String> define_parameter_list():{

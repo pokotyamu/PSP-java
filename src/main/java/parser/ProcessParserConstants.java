@@ -23,23 +23,29 @@ public interface ProcessParserConstants {
   /** RegularExpression Id. */
   int RK = 11;
   /** RegularExpression Id. */
-  int EQ = 12;
+  int LB = 12;
   /** RegularExpression Id. */
-  int COM = 13;
+  int RB = 13;
   /** RegularExpression Id. */
-  int statement_operator = 14;
+  int EQ = 14;
   /** RegularExpression Id. */
-  int condition_operator = 15;
+  int COM = 15;
   /** RegularExpression Id. */
-  int decimal_numeral = 16;
+  int SM = 16;
   /** RegularExpression Id. */
-  int digits = 17;
+  int AND = 17;
   /** RegularExpression Id. */
-  int string_literal = 18;
+  int condition_operator = 18;
   /** RegularExpression Id. */
-  int boolean_literal = 19;
+  int decimal_numeral = 19;
   /** RegularExpression Id. */
-  int IDENTIFIERS = 20;
+  int digits = 20;
+  /** RegularExpression Id. */
+  int string_literal = 21;
+  /** RegularExpression Id. */
+  int boolean_literal = 22;
+  /** RegularExpression Id. */
+  int IDENTIFIERS = 23;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -58,9 +64,12 @@ public interface ProcessParserConstants {
     "\")\"",
     "\"[\"",
     "\"]\"",
+    "\"{\"",
+    "\"}\"",
     "\"=\"",
     "\",\"",
-    "<statement_operator>",
+    "\";\"",
+    "\"&\"",
     "<condition_operator>",
     "<decimal_numeral>",
     "<digits>",

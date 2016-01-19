@@ -1,1 +1,3 @@
-productivity = function(matrix,Add,Mod,Time)
+productivity = function(matrix,Add,Mod,Time){
+     matrix = matrix[,Add];
+}
