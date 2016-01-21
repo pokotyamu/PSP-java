@@ -37,9 +37,7 @@ public class TestGraphData {
     }
     
     public static GraphData lineGraphData() {
-        LineGraphData gd = (LineGraphData) GraphDataFactory.createGraphData("line");
-        Matrix m = createTestData();
-        gd.setMatrix(m);
+        LineGraphData gd = (LineGraphData) GraphDataFactory.createGraphData("line",createTestData());
         gd.setCategory("ProjectID");
         gd.addSeries("ActT");
         gd.addSeries("ActA");
@@ -48,10 +46,8 @@ public class TestGraphData {
         return gd;
     }
 
-    public static GraphData columnGraphData() {
-        ColumnGraphData gd = (ColumnGraphData) GraphDataFactory.createGraphData("column");
-        Matrix m = createTestData();
-        gd.setMatrix(m);
+    public static GraphData columnGraphData() {        
+        ColumnGraphData gd = (ColumnGraphData) GraphDataFactory.createGraphData("column",createTestData());
         gd.setCategory("ProjectID");
         gd.addSeries("ActT");
         gd.addSeries("ActA");
@@ -61,18 +57,21 @@ public class TestGraphData {
     }
 
     public static GraphData pieGraphData(){
-        PieGraphData gd = (PieGraphData) GraphDataFactory.createGraphData("pie");
+        Matrix m = new Matrix();
         for (int i = 0; i < 5; i++) {
             DataSet ds = new DataSet("sample"+i);
             ds.addCell(new Cell((int) (10 * Math.random())));
-            gd.series.add(ds);
+            m.addCol(ds);
+        }
+        PieGraphData gd = (PieGraphData) GraphDataFactory.createGraphData("pie",m);
+        for(int i = 0; i < 5; i++){
+            gd.addSeries("sample"+i);
         }
         gd.seriesName = "時間";
         return gd;
     }
     
     public static GraphData scatterGraphData(){
-        ScatterGraphData gd = (ScatterGraphData) GraphDataFactory.createGraphData("scatter");
         DataSet ds = new DataSet("xdata");
         DataSet ds1 = new DataSet("ydata");
         for(int i = 0; i < 120; i++){
@@ -82,7 +81,7 @@ public class TestGraphData {
         Matrix  m = new Matrix("titlename");
         m.addCol(ds);
         m.addCol(ds1);
-        gd.matrix = m;
+        ScatterGraphData gd = (ScatterGraphData) GraphDataFactory.createGraphData("scatter",m);
         return gd;
     }
 }

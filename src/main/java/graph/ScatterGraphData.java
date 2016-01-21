@@ -18,6 +18,11 @@ public class ScatterGraphData extends GraphData{
         super();
         this.type = "scatter";
     }
+
+    public ScatterGraphData(Matrix matrix) {
+        super(matrix);
+        this.type = "scatter";
+    }
     
     @Override
     public String appendCategory() {

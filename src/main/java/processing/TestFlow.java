@@ -6,7 +6,6 @@
 package processing;
 
 import data.Matrix;
-import data.TestGraphData;
 import data.UserData;
 import graph.GraphData;
 import graph.LineGraphData;
@@ -19,12 +18,12 @@ import java.util.List;
  */
 public class TestFlow {
 
-    public static List<GraphData> procesReport(UserData ud) {
+    public static List<GraphData> processReport(UserData ud) {
         List<GraphData> list = new ArrayList<>();
         Matrix m = ud.getMatrix("ProgramSize");
         LineGraphData gd1 = new LineGraphData();
         gd1.setMatrix(m);
-        gd1.title = "title";
+        gd1.setTitle("title");
         gd1.setCategory("ProjectID");
         gd1.addSeries("ActualT");
         gd1.addSeries("ActualA");
