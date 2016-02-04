@@ -32,6 +32,10 @@ public class PieGraphData extends GraphData{
         return "";
     }
 
+    public void setSeriesName(String seriesName) {
+        this.seriesName = seriesName;
+    }
+
     @Override
     public String appendSeries() {
         StringBuilder str = new StringBuilder();

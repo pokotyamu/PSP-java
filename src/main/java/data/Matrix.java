@@ -30,6 +30,13 @@ public class Matrix {
         projectIDds = new DataSet("ProjectIDs");
         this.name = name;
     }
+
+    public Matrix(List<DataSet> cols, String name) {
+        this.cols = cols;
+        this.name = name;
+    }
+    
+    
     
     //DataSetの順番については正しく並べ替えられているものとする
     public void addCol(DataSet ds){
@@ -115,7 +122,6 @@ public class Matrix {
         for (DataSet col : cols) {
             col.switchCell(a, b);
         }
-        this.projectIDds.switchCell(a,b);
     }
 
     @Override
@@ -142,5 +148,48 @@ public class Matrix {
     public int size() {
         return this.cols.size();
     }
+    
+    public List<String> getNameList(){
+        List<String> namelist = new ArrayList<>();
+        for (DataSet col : cols) {
+            namelist.add(col.getDataName());
+        }
+        return namelist;
+    }
 
+    public void mergeMatrix(Matrix m2) {
+        for(DataSet ds : m2.getCols()){
+            if(!this.getNameList().contains(ds.getDataName())){
+                cols.add(ds);
+            }            
+        }
+    }
+
+    public void setName(String target, String after) {
+        this.getDataSet(target).setName(after);
+    }
+    
+    public Matrix selectDataSet(List<String> names){
+        List<DataSet> list = new ArrayList<>();
+        for (String name : names) {
+            list.add(getDataSet(name));
+        }
+        return new Matrix(list, name);        
+    }
+    
+    public void filter(String target, String op, int num){
+        DataSet ds = this.getDataSet(target);
+        for (int i = ds.size() - 1; i >=0; i--) {
+            Cell c = ds.getCell(i);
+            if(!c.check(op, num)){
+                removeRowCell(i);
+            }
+        }
+    }
+
+    private void removeRowCell(int i) {
+        for (DataSet col : cols) {
+            col.remove(i);
+        }
+    }
 }

@@ -42,4 +42,20 @@ public class Cell {
     public String toString() {
         return value.toString();
     }
+
+    public boolean check(String op, int i) {
+        switch(op){
+            case "==":
+                return (int)this.getNumValue() == i;
+            case ">":
+                return (int)this.getNumValue() > i;
+            case "<":
+                return (int)this.getNumValue() < i;
+            case ">=":
+                return (int)this.getNumValue() >= i;
+            case "<=":
+                return (int)this.getNumValue() <= i;
+        }
+        return false;
+    }
 }
