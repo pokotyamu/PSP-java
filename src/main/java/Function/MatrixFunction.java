@@ -8,6 +8,7 @@ package Function;
 import data.Cell;
 import data.DataSet;
 import data.Matrix;
+import jdk.nashorn.internal.codegen.CompilerConstants;
 
 /**
  *
@@ -45,5 +46,22 @@ public class MatrixFunction {
             ans.addCell(new Cell(num / ds1.getNumCell(index)));
         }
         m.addCol(ans);
+    }
+
+    public static Matrix apply(Matrix time, String function, boolean isRow) {
+        Matrix temp = new Matrix();
+        if (isRow) {
+
+        }else{//byCol
+            for(String names : time.getNameList()){
+                switch(function){
+                    case "sum":
+                        temp.addCol(DataSetFunction.sum(time.getDataSet(names)));
+                }
+            }
+
+        }
+        return temp;        
+
     }
 }

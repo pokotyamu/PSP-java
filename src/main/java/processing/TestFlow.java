@@ -10,6 +10,7 @@ import data.Matrix;
 import data.UserData;
 import graph.GraphData;
 import graph.LineGraphData;
+import graph.PieGraphData;
 import java.util.ArrayList;
 import java.util.List;
 import javax.print.attribute.Size2DSyntax;
@@ -33,15 +34,33 @@ public class TestFlow {
         m1.setName("DIV_ActualT.DIV_AT.60","productivity");
         LineGraphData gd1 = new LineGraphData();
         gd1.setMatrix(m1);
-        gd1.setTitle("title");
+        gd1.setTitle("生産性の推移");
         gd1.setCategory("ProjectID");
         gd1.addSeries("productivity");
         gd1.setxAsixTtile("ProjectID");
         gd1.setyAsixTtile("LOC/h");
         list.add(gd1);
 */       
-        //
-        
+
+        List<String> namelist = new ArrayList<>();
+        namelist.add("ActMinPlan");
+        namelist.add("ActMinDsgn");
+        namelist.add("ActMinDLDR");
+        namelist.add("ActMinCode");
+        namelist.add("ActMinCR");
+        namelist.add("ActMinCompile");
+        namelist.add("ActMinTest");
+        namelist.add("ActMinPM");
+        Matrix time = ud.getMatrix("PSPAssgtData").selectDataSet(namelist);
+        Matrix sum = MatrixFunction.apply(time,"sum",false);
+        PieGraphData phase = new PieGraphData(sum);
+        for (String name : namelist) {
+            sum.setName("SUM_"+name, name);
+            phase.addSeries(sum.getDataSet(name));
+        }
+        phase.setTitle("フェーズの時間割合");
+        phase.setSeriesName("時間(%)");
+        list.add(phase);
         return list;
     }
 }

@@ -30,6 +30,13 @@ public class Matrix {
         projectIDds = new DataSet("ProjectIDs");
         this.name = name;
     }
+
+    public Matrix(List<DataSet> cols, String name) {
+        this.cols = cols;
+        this.name = name;
+    }
+    
+    
     
     //DataSetの順番については正しく並べ替えられているものとする
     public void addCol(DataSet ds){
@@ -163,4 +170,11 @@ public class Matrix {
         this.getDataSet(target).setName(after);
     }
     
+    public Matrix selectDataSet(List<String> names){
+        List<DataSet> list = new ArrayList<>();
+        for (String name : names) {
+            list.add(getDataSet(name));
+        }
+        return new Matrix(list, name);        
+    }
 }
