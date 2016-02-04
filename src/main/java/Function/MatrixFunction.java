@@ -64,15 +64,40 @@ public class MatrixFunction {
         return temp;        
     }
 
-    public static Matrix byCount(Matrix defect, String colName, String target) {
-        Matrix count = new Matrix(defect.getName());
-        DataSet ds = defect.getDataSet(target).uniqueList();
+    public static Matrix byCount(Matrix matrix, String colName, String target) {
+        Matrix count = new Matrix(matrix.getName());
+        DataSet ds = matrix.getDataSet(target).uniqueList();
         count.addCol(ds);
         DataSet cds = new DataSet("COUNT_"+colName);
         for(Cell c : ds.getData()){
-            cds.addCell(new Cell(DataSetFunction.count(defect.getDataSet(target),c)));
+            cds.addCell(new Cell(DataSetFunction.count(matrix.getDataSet(target),c)));
         }
         count.addCol(cds);
         return count;
+    }
+
+    public static void parcentage(Matrix matrix, String colName) {
+        DataSet ds = new DataSet("PARCENTAGE_"+colName);
+        DataSet targetDS = matrix.getDataSet(colName);
+        DataSet sum = DataSetFunction.sum(targetDS);
+        for (Cell c :targetDS.getData()){
+            ds.addCell(new Cell(c.getNumValue() / sum.getNumCell(0) * 100));
+        }
+        matrix.addCol(ds);
+    }
+
+    public static void stackParcentage(Matrix matrix, String colName) {
+        parcentage(matrix, colName);
+        DataSet ds = new DataSet("STACK_PARCENTAGE_"+colName);
+        DataSet targetDS = matrix.getDataSet("PARCENTAGE_"+colName);
+        double stack = 0.0;
+        for(Cell c : targetDS.getData()){
+            stack+=c.getNumValue();
+            if(stack > 100.0){
+                stack = 100.0;
+            }            
+            ds.addCell(new Cell(stack));
+        }
+        matrix.addCol(ds);
     }
 }

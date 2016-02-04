@@ -69,6 +69,9 @@ public class TestFlow {
         System.out.println(defect.getDataSet("PhaseInjectedID"));
         Matrix count_Phase = MatrixFunction.byCount(defect,"PhaseInjectedID","DefectTypeID");
         count_Phase.sort(0,"COUNT_PhaseInjectedID");
+        MatrixFunction.parcentage(count_Phase,"COUNT_PhaseInjectedID");
+        MatrixFunction.stackParcentage(count_Phase,"COUNT_PhaseInjectedID");
+        
         return list;
     }
 }
