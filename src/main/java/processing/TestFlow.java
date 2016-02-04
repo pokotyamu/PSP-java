@@ -13,8 +13,7 @@ import graph.LineGraphData;
 import graph.PieGraphData;
 import java.util.ArrayList;
 import java.util.List;
-import javax.print.attribute.Size2DSyntax;
-import org.codehaus.plexus.configuration.PlexusConfigurationMerger;
+
 
 /**
  *
@@ -40,8 +39,8 @@ public class TestFlow {
         gd1.setxAsixTtile("ProjectID");
         gd1.setyAsixTtile("LOC/h");
         list.add(gd1);
-*/       
 
+        //フェーズ時間割合
         List<String> namelist = new ArrayList<>();
         namelist.add("ActMinPlan");
         namelist.add("ActMinDsgn");
@@ -61,6 +60,14 @@ public class TestFlow {
         phase.setTitle("フェーズの時間割合");
         phase.setSeriesName("時間(%)");
         list.add(phase);
+        
+        */ 
+        
+        //欠陥種別のパレート図
+        Matrix defect = ud.getMatrix("LOGDDetail");
+        defect.filter("PhaseInjectedID","==",2);
+        System.out.println(defect.getDataSet("PhaseInjectedID"));
+        
         return list;
     }
 }

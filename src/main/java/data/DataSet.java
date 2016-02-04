@@ -87,4 +87,12 @@ public class DataSet {
     public void setName(String name) {
         this.dataName = name;
     }
+
+    public void remove(int index) {
+        this.cells.remove(index);
+    }
+
+    public void remove(Cell c) {
+        this.cells.remove(c);
+    }
 }

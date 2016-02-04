@@ -177,4 +177,20 @@ public class Matrix {
         }
         return new Matrix(list, name);        
     }
+    
+    public void filter(String target, String op, int num){
+        DataSet ds = this.getDataSet(target);
+        for (int i = ds.size() - 1; i >=0; i--) {
+            Cell c = ds.getCell(i);
+            if(!c.check(op, num)){
+                removeRowCell(i);
+            }
+        }
+    }
+
+    private void removeRowCell(int i) {
+        for (DataSet col : cols) {
+            col.remove(i);
+        }
+    }
 }

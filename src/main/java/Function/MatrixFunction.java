@@ -64,4 +64,8 @@ public class MatrixFunction {
         return temp;        
 
     }
+
+    public static void byCount(Matrix defect, String defectTypeID) {
+        
+    }
 }
