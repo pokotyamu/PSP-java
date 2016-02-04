@@ -10,6 +10,7 @@ import data.Matrix;
 import data.UserData;
 import graph.GraphData;
 import graph.LineGraphData;
+import graph.ParetoGraphData;
 import graph.PieGraphData;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ public class TestFlow {
 
     public static List<GraphData> processReport(UserData ud) {
         List<GraphData> list = new ArrayList<>();
-/*
+
         //生産性
         Matrix m1 = ud.getMatrix("ProgramSize");
         Matrix m2 = ud.getMatrix("Projects");
@@ -60,9 +61,7 @@ public class TestFlow {
         phase.setTitle("フェーズの時間割合");
         phase.setSeriesName("時間(%)");
         list.add(phase);
-        
-        */ 
-        
+/*        
         //欠陥種別のパレート図
         Matrix defect = ud.getMatrix("LOGDDetail");
         defect.filter("PhaseInjectedID","==",2);
@@ -71,7 +70,11 @@ public class TestFlow {
         count_Phase.sort(0,"COUNT_PhaseInjectedID");
         MatrixFunction.parcentage(count_Phase,"COUNT_PhaseInjectedID");
         MatrixFunction.stackParcentage(count_Phase,"COUNT_PhaseInjectedID");
+        System.out.println(count_Phase);
         
+        
+        ParetoGraphData defect_pareto = new ParetoGraphData();
+        */
         return list;
     }
 }

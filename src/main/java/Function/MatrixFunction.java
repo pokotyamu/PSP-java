@@ -8,6 +8,8 @@ package Function;
 import data.Cell;
 import data.DataSet;
 import data.Matrix;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import jdk.nashorn.internal.codegen.CompilerConstants;
 
 /**
@@ -81,7 +83,8 @@ public class MatrixFunction {
         DataSet targetDS = matrix.getDataSet(colName);
         DataSet sum = DataSetFunction.sum(targetDS);
         for (Cell c :targetDS.getData()){
-            ds.addCell(new Cell(c.getNumValue() / sum.getNumCell(0) * 100));
+            BigDecimal bi = new BigDecimal(String.valueOf(c.getNumValue() / sum.getNumCell(0) * 100));
+            ds.addCell(new Cell(bi.setScale(4,RoundingMode.UP)));
         }
         matrix.addCol(ds);
     }
@@ -96,7 +99,8 @@ public class MatrixFunction {
             if(stack > 100.0){
                 stack = 100.0;
             }            
-            ds.addCell(new Cell(stack));
+            BigDecimal bi = new BigDecimal(String.valueOf(stack));
+            ds.addCell(new Cell(bi.setScale(4, RoundingMode.UP)));
         }
         matrix.addCol(ds);
     }
