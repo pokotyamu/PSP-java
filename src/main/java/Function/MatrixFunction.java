@@ -25,7 +25,8 @@ public class MatrixFunction {
         System.out.println(ds1);
         System.out.println(ds2);
         for(int index = 0; index < ds1.size(); index++){
-            ans.addCell(new Cell(ds1.getNumCell(index) / ds2.getNumCell(index)));
+            BigDecimal bi = new BigDecimal(String.valueOf(ds1.getNumCell(index) / ds2.getNumCell(index)));
+            ans.addCell(new Cell(bi.setScale(4,RoundingMode.UP)));
         }
         System.out.println(ans);
         m.addCol(ans);
@@ -35,7 +36,9 @@ public class MatrixFunction {
         DataSet ds1 = m.getDataSet(d1);
         DataSet ans = new DataSet("DIV_"+d1+"."+num);
         for(int index = 0; index < ds1.size(); index++){
-            ans.addCell(new Cell(ds1.getNumCell(index) / num));
+            BigDecimal bi = new BigDecimal(String.valueOf(ds1.getNumCell(index)/num));
+            ans.addCell(new Cell(bi.setScale(4,RoundingMode.UP)));
+
         }
         m.addCol(ans);
     }
@@ -45,7 +48,8 @@ public class MatrixFunction {
         DataSet ds1 = m.getDataSet(d1);
         DataSet ans = new DataSet("DIV_"+num+"."+d1);
         for(int index = 0; index < ds1.size(); index++){
-            ans.addCell(new Cell(num / ds1.getNumCell(index)));
+            BigDecimal bi = new BigDecimal(String.valueOf(num / ds1.getNumCell(index)));
+            ans.addCell(new Cell(bi.setScale(4,RoundingMode.UP)));
         }
         m.addCol(ans);
     }
