@@ -58,11 +58,12 @@ public class Main {
             try {
                 Database db = DatabaseBuilder.open(file);
                 ud = new UserData(MatrixFactory.create(db));
+                results.setGraphData(TestFlow.processReport(ud));
             }
             catch(Exception e){
                 System.out.println(e);
             }
-            return ud.getMatrixNames();
+            return results.toJson();
         });
     }
 }
