@@ -68,7 +68,7 @@ public class TestFlow {
         defect.filter("PhaseInjectedID","==",2);
         System.out.println(defect.getDataSet("PhaseInjectedID"));
         Matrix count_Phase = MatrixFunction.byCount(defect,"PhaseInjectedID","DefectTypeID");
-        
+        count_Phase.sort(0,"COUNT_PhaseInjectedID");
         return list;
     }
 }

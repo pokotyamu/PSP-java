@@ -23,5 +23,15 @@ public class DataSetFunction {
         ds.addCell(new Cell(sum));
         return ds;
     }
+
+    public static int count(DataSet ds, Cell target) {
+        int count = 0;
+        for(Cell c : ds.getData()){
+            if(c.equals(target)){
+                count++;
+            }
+        }
+        return count;
+    }
     
 }

@@ -122,7 +122,6 @@ public class Matrix {
         for (DataSet col : cols) {
             col.switchCell(a, b);
         }
-        this.projectIDds.switchCell(a,b);
     }
 
     @Override

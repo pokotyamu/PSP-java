@@ -65,8 +65,14 @@ public class MatrixFunction {
     }
 
     public static Matrix byCount(Matrix defect, String colName, String target) {
+        Matrix count = new Matrix(defect.getName());
         DataSet ds = defect.getDataSet(target).uniqueList();
-        System.out.println(ds);
-        return defect;
+        count.addCol(ds);
+        DataSet cds = new DataSet("COUNT_"+colName);
+        for(Cell c : ds.getData()){
+            cds.addCell(new Cell(DataSetFunction.count(defect.getDataSet(target),c)));
+        }
+        count.addCol(cds);
+        return count;
     }
 }
