@@ -142,5 +142,25 @@ public class Matrix {
     public int size() {
         return this.cols.size();
     }
+    
+    public List<String> getNameList(){
+        List<String> namelist = new ArrayList<>();
+        for (DataSet col : cols) {
+            namelist.add(col.getDataName());
+        }
+        return namelist;
+    }
 
+    public void mergeMatrix(Matrix m2) {
+        for(DataSet ds : m2.getCols()){
+            if(!this.getNameList().contains(ds.getDataName())){
+                cols.add(ds);
+            }            
+        }
+    }
+
+    public void setName(String target, String after) {
+        this.getDataSet(target).setName(after);
+    }
+    
 }

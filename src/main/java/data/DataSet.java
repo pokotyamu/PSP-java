@@ -83,4 +83,8 @@ public class DataSet {
     public boolean isExist() {
         return this.dataName.length() > 0;
     }
+
+    public void setName(String name) {
+        this.dataName = name;
+    }
 }

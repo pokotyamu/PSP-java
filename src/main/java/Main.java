@@ -51,7 +51,7 @@ public class Main {
             return results.toJson();
         });
         
-        get("/debug", (req, res) -> {
+        get("/debug", "application/json",(req, res) -> {
             String uri = "http://localhost:3000/mdbs/6/download";
             File file  = JsonMDBParser.create(uri);
             UserData ud = new UserData();
