@@ -67,6 +67,7 @@ public class TestFlow {
         Matrix defect = ud.getMatrix("LOGDDetail");
         defect.filter("PhaseInjectedID","==",2);
         System.out.println(defect.getDataSet("PhaseInjectedID"));
+        Matrix count_Phase = MatrixFunction.byCount(defect,"PhaseInjectedID","DefectTypeID");
         
         return list;
     }

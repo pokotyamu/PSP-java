@@ -95,4 +95,23 @@ public class DataSet {
     public void remove(Cell c) {
         this.cells.remove(c);
     }
+
+    public DataSet uniqueList() {
+        DataSet ds =  new DataSet(dataName);
+        for(Cell c : cells){
+            if(!ds.exist(c)){
+                ds.addCell(c);
+            }
+        }
+        return ds;
+    }
+    
+    private boolean exist(Cell c){
+        for (Cell cell : cells) {
+            if(cell.equals(c)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -62,10 +62,11 @@ public class MatrixFunction {
 
         }
         return temp;        
-
     }
 
-    public static void byCount(Matrix defect, String defectTypeID) {
-        
+    public static Matrix byCount(Matrix defect, String colName, String target) {
+        DataSet ds = defect.getDataSet(target).uniqueList();
+        System.out.println(ds);
+        return defect;
     }
 }
