@@ -10,13 +10,25 @@ import data.DataSet;
 import data.Matrix;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import jdk.nashorn.internal.codegen.CompilerConstants;
 
 /**
  *
  * @author pokotyamu
  */
 public class MatrixFunction {
+
+    public static void add(Matrix m, String d1, String d2) {
+        DataSet ds1 = m.getDataSet(d1);
+        DataSet ds2 = m.getDataSet(d2);
+        DataSet ans = new DataSet("ADD_"+d1+"."+d2);
+        for(int index = 0; index < ds1.size(); index++){
+            BigDecimal bi = new BigDecimal(String.valueOf(ds1.getNumCell(index) + ds2.getNumCell(index)));
+            ans.addCell(new Cell(bi.setScale(4,RoundingMode.UP)));
+        }
+        System.out.println(ans);
+        m.addCol(ans);
+    }
+
     
     public static void div(Matrix m, String d1, String d2) {
         DataSet ds1 = m.getDataSet(d1);

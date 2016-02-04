@@ -30,8 +30,10 @@ public class TestFlow {
         Matrix m2 = ud.getMatrix("Projects");
         m1.mergeMatrix(m2);
         MatrixFunction.div(m1,"AT", 60);
-        MatrixFunction.div(m1,"ActualT","DIV_AT.60");
-        m1.setName("DIV_ActualT.DIV_AT.60","productivity");
+        MatrixFunction.add(m1, "ActualA", "ActualM");
+        m1.setName("ADD_ActualA.ActualM","ActualA&M");
+        MatrixFunction.div(m1,"ActualA&M","DIV_AT.60");        
+        m1.setName("DIV_ActualA&M.DIV_AT.60","productivity");
         LineGraphData gd1 = new LineGraphData();
         gd1.setMatrix(m1);
         gd1.setTitle("生産性の推移");
